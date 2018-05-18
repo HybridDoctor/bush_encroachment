@@ -1,0 +1,23 @@
+--
+
+
+CREATE TABLE alien_final AS 
+
+SELECT 	pagenumber,
+		dn_new,
+        ROUND(avdens, 3) AS avdens,
+        ROUND(acacicyclo, 3) AS acacicyclo,
+        ROUND(acacimelan, 3) AS acacimelan,
+        ROUND(acacisalig, 3) AS acacisalig,
+        ROUND(eucalspp, 3) AS eucalspp,
+        ROUND(pinusspp, 3) AS pinusspp,
+        ROUND(populspp, 3) AS populspp,
+        ROUND(prosospp, 3) AS prosospp,
+        ROUND(salixbabyl, 3) AS salixbabyl
+
+FROM alien_total ;
+
+-- Adding dn values to new table
+
+
+
