@@ -1,0 +1,29 @@
+-- Using a combination of landcover data (1990 and 2013) and carbon data: 
+-- To view metadata and data, view bea.dirisa.org.za
+-- Code below corresponds to postgres pieces of code for each column, so is piecemeal
+
+-- lcov recent carbon averages in new table, dn_ave
+
+-- Next add column of averages to 1990 based on lcov
+
+ALTER TABLE bush_encroachment.bush_nogeom ADD COLUMN dn_1990 NUMERIC ; 
+UPDATE bush_encroachment.bush_nogeom
+SET dn_1990 = dn_ave
+FROM bush_encroachment.dn_ave
+WHERE bush_nogeom.lcov_1990 = dn_ave.lcov_2013 ;
+
+-- Averages added to 2013 on lcov
+
+ALTER TABLE bush_encroachment.bush_nogeom ADD COLUMN dn_2013 NUMERIC ; 
+UPDATE bush_encroachment.bush_nogeom
+SET dn_2013 = dn_ave
+FROM bush_encroachment.dn_ave
+WHERE bush_nogeom.lcov_2013 = dn_ave.lcov_2013 ;
+
+-- Carbon change calculation
+
+ALTER TABLE bush_encroachment.bush_nogeom ADD COLUMN dn_change NUMERIC ; 
+UPDATE bush_encroachment.bush_nogeom
+SET dn_change = dn_2013 - dn_1990 ;
+
+
