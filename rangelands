@@ -1,0 +1,6 @@
+-- simple counting grids where condition applies
+
+SELECT COUNT (*) FROM bush_encroachment.rangelands_publish
+WHERE rangeland = true AND protected = false  AND conservation = false;
+
+
