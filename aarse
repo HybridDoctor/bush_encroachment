@@ -1,0 +1,23 @@
+
+CREATE TABLE bushbuck_aarse AS
+SELECT
+    local_municipalities_2016.cat_b,
+    all_woody_biomass_500.pagenumber,
+    all_woody_biomass_500.dn_new
+    FROM all_woody_biomass_500, local_municipalities_2016
+    WHERE ST_Within(all_woody_biomass_500.geom, local_municipalities_2016.geom)
+    AND local_municipalities_2016.cat_b = 'MP325' ;
+
+
+ALTER TABLE public.bushbuck_aarse ADD COLUMN lcov_1990 BIGINT, ADD COLUMN lcov_2013 BIGINT, ADD COLUMN old_new CHARACTER (20) ;
+
+UPDATE public.bushbuck_aarse
+	SET	lcov_1990 = bush_encroachment.lcov_1990,
+		lcov_2013 = bush_encroachment.lcov_1990,
+        old_new = bush_encroachment.old_new
+	FROM bush_encroachment
+    WHERE bush_encroachment.pagenumber = bushbuck_aarse.pagenumber ;
+    
+   
+
+
