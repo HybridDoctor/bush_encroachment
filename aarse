@@ -18,6 +18,29 @@ UPDATE public.bushbuck_aarse
 	FROM bush_encroachment
     WHERE bush_encroachment.pagenumber = bushbuck_aarse.pagenumber ;
     
-   
+CREATE TABLE bushbuck_avg AS
+SELECT 
+	lcov_2013,
+    ROUND(AVG(dn_new), 3) AS dn_2013
+    FROM bushbuck_aarse 
+    GROUP BY lcov_2013 ;
+    
+ALTER TABLE bushbuck_aarse ADD COLUMN dn_1990 NUMERIC ;
+
+UPDATE bushbuck_aarse
+	SET dn_2013 = bushbuck_avg.dn_2013
+    FROM bushbuck_avg
+    WHERE bushbuck_aarse.lcov_2013 = bushbuck_avg.lcov_2013 ;
+    
+ALTER TABLE bushbuck_aarse ADD COLUMN dn_1990 NUMERIC ;
+
+UPDATE bushbuck_aarse
+	SET dn_1990 = bushbuck_avg.dn_2013
+    FROM bushbuck_avg
+    WHERE bushbuck_aarse.lcov_1990 = bushbuck_avg.lcov_2013 ;
+
+
+
+
 
 
