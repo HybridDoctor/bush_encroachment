@@ -40,6 +40,22 @@ UPDATE bushbuck_aarse
     WHERE bushbuck_aarse.lcov_1990 = bushbuck_avg.lcov_2013 ;
 
 
+CREATE TABLE fires_new AS
+
+SELECT
+  bushbuckridge_fires_analysis.gid,
+  fires_new.pagenumber,
+  fires_new.dist
+FROM bushbuckridge_fires_analysis
+CROSS JOIN LATERAL 
+  (SELECT
+     pagenumber, 
+     ST_Distance(bushbuck_aarse.geom, bushbuckridge_fires_analysis.geom) as dist
+     FROM bushbuck_aarse
+     ORDER BY bushbuck_aarse.geom <-> bushbuckridge_fires_analysis.geom
+   LIMIT 1) AS fires_new
+
+
 
 
 
