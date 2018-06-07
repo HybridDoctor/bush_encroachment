@@ -55,7 +55,18 @@ CROSS JOIN LATERAL
      ORDER BY bushbuck_aarse.geom <-> bushbuckridge_fires_analysis.geom
    LIMIT 1) AS fires_new
 
+CREATE TABLE bushbuck_2013fires AS
 
+SELECT 	AVG(frp) AS ave_int,
+		pagenumber,
+        COUNT (*) AS Freq
+  FROM bushbuckridge_fires_analysis
+ WHERE acq_date >= '2013-01-01'
+  AND acq_date <  '2013-12-31'
+  GROUP BY pagenumber ;
+  
+  
+  
 
 
 
