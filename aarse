@@ -13,7 +13,7 @@ ALTER TABLE public.bushbuck_aarse ADD COLUMN lcov_1990 BIGINT, ADD COLUMN lcov_2
 
 UPDATE public.bushbuck_aarse
 	SET	lcov_1990 = bush_encroachment.lcov_1990,
-		lcov_2013 = bush_encroachment.lcov_1990,
+		lcov_2013 = bush_encroachment.lcov_2013,
         old_new = bush_encroachment.old_new
 	FROM bush_encroachment
     WHERE bush_encroachment.pagenumber = bushbuck_aarse.pagenumber ;
@@ -25,7 +25,7 @@ SELECT
     FROM bushbuck_aarse 
     GROUP BY lcov_2013 ;
     
-ALTER TABLE bushbuck_aarse ADD COLUMN dn_1990 NUMERIC ;
+ALTER TABLE bushbuck_aarse ADD COLUMN dn_2013 NUMERIC ;
 
 UPDATE bushbuck_aarse
 	SET dn_2013 = bushbuck_avg.dn_2013
