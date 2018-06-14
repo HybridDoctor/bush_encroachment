@@ -27,3 +27,16 @@ UPDATE bush_encroachment.bush_nogeom
 SET dn_change = dn_2013 - dn_1990 ;
 
 
+
+
+-- Adding biome to bush_nogeom
+CREATE TABLE lcov_veg AS
+SELECT   parent_2013, 
+         veg_type, 
+         COUNT(*) 
+FROM bush_encroachment.bush_nogeom 
+GROUP BY veg_type, parent_2013 ;
+
+
+
+
